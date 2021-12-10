@@ -1,0 +1,32 @@
+fields:
+    sanctum_enable:
+        label: 'Enable Sanctum Tokens'
+        span: auto
+        type: switch
+        comment: 'Activate Sanctum API Tokens'
+    sanctum_htaccess_generate_btn:
+        label: Update .htaccess
+        span: auto
+        type: partial
+        path: $/mikp/sanctum/views/_btn_generate.htm
+        comment: 'Run .htaccess update console command'
+    sanctum_token_limit:
+        label: 'User Token Limit'
+        span: auto
+        placeholder: '3'
+        default: '3'
+        type: number
+        comment: 'The maximum number of allowed API Tokens per user'
+    sanctum_token_expiration:
+        label: 'Token Expiration'
+        span: auto
+        placeholder: '60'
+        type: number
+        comment: 'The expiration time on API tokens'
+    sanctum_user_class:
+        label: "User Model Class"
+        span: auto
+        # required: 1
+        type: text
+        default: "Winter\\User\\Models\\User"
+        comment: "i.e. Author\\Plugin\\Models\\User. Default: Winter\\User\\Models\\User"

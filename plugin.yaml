@@ -1,0 +1,6 @@
+plugin:
+    name: 'mikp.sanctum::lang.plugin.name'
+    description: 'mikp.sanctum::lang.plugin.description'
+    author: mik-p
+    icon: wn-icon-key
+    homepage: ''
