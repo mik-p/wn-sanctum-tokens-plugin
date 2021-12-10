@@ -148,13 +148,16 @@ class API extends Controller
         }
 
         // delete it
+        $id = $token->id;
+        $name = $token->name;
+        $abilities = $token->abilities;
         $user->tokens()->where('id', $tokenId)->delete();
 
         return response()->json([
             'message' => 'token revoked',
-            'id' => $token->id,
-            'name' => $token->name,
-            'abilities' => $token->abilities,
+            'id' => $id,
+            'name' => $name,
+            'abilities' => $abilities,
             'status' => 'success'
         ], 200);
     }
