@@ -1,7 +1,8 @@
 <?php //namespace mikp\sanctum\Routes;
 
 $version = 'v1';
-$base_uri = '/api/' . $version;
+$api_name = '/sanctum';
+$base_uri = '/api/' . $version . $api_name;
 
 // api doc json file
 Route::get($base_uri . '/sanctum/api-docs.json', 'mikp\sanctum\Http\Controllers\API@docs');

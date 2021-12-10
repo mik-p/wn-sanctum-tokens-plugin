@@ -11,9 +11,9 @@ This plugin depends on the Winter.User plugin for users
 
 There are 3 endpoints that can be used to interact with tokens
 
-- {POST} `api/v1/token/create`
-- {POST} `api/v1/token/refresh`
-- {POST} `api/v1/token/revoke/{tokenId}`
+- {POST} `api/v1/sanctum/token/create`
+- {POST} `api/v1/sanctum/token/refresh`
+- {POST} `api/v1/sanctum/token/revoke/{tokenId}`
 
 The **'create'** endpoint does not act as a log in, it is guarded with the \Winter\User\Classes\AuthMiddleware which means the user must already be logged in.
 
