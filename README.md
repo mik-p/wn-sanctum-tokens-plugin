@@ -1,11 +1,11 @@
 # wn-sanctum-tokens-plugin
 
-Add Laravel Sanctum API Tokens to Winter.Users to allow API Auth via Sanctum tokens for front end users
+Add Laravel Sanctum API Tokens to Winter.Users to allow API Auth via Sanctum tokens for front end users. It is useful if you need API Bearer Token Auth and don't want to go with OAuth2.
 
-## depends on
+### depends on
 
+This plugin depends on Laravel Sanctum for tokens
 This plugin depends on the Winter.User plugin for users
-
 
 ## usage
 
