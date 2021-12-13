@@ -25,6 +25,9 @@ class Plugin extends PluginBase
 
     public function registerComponents()
     {
+        return [
+            'mikp\sanctum\Components\CreateToken' => 'createtoken',
+        ];
     }
 
     public function registerSettings()

@@ -1,0 +1,15 @@
+<h5>Create Token</h5>
+
+{% if __SELF__.activated %}
+
+{% partial __SELF__~'::create-token'%}
+
+<br />
+
+{% partial __SELF__~'::token-list'%}
+
+{% else %}
+
+<p>This service has not been activated by the system administrator</p>
+
+{% endif %}

@@ -29,9 +29,10 @@ Route::group([
     'prefix' => $base_uri . '/token',
     'middleware' => [
         'api',
-        // 'web',
-        'mikp\sanctum\Http\Middleware\UserFromBearerToken',
-        // 'Winter\User\Classes\AuthMiddleware',
+        'web',
+        // 'mikp\sanctum\Http\Middleware\UserFromBearerToken',
+        'mikp\sanctum\Http\Middleware\SoftUserFromBearerToken',
+        'Winter\User\Classes\AuthMiddleware',
         // 'auth',
         // 'auth:api',
         // 'auth:sanctum',

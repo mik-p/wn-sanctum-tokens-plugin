@@ -92,8 +92,26 @@ class API extends Controller
 
         $user = Auth::getUser();
 
-        // update token created_at
+        // try get the current token
         $current_token = $user->currentAccessToken();
+
+        // if not there get from query params
+        if (!$current_token) {
+            $tokenId = $request->input('tokenId', null);
+            if (!$tokenId) {
+                return Response::make('bad request: missing token to refresh', 400);
+            }
+
+            // find a token owned by this user by given id
+            $current_token = $user->tokens()->where('id', $tokenId)->first();
+
+            // if it doesn't exist
+            if (!$current_token) {
+                return Response::make('bad request: given token not found', 400);
+            }
+        }
+
+        // update token created_at
         if (
             method_exists($current_token->getConnection(), 'hasModifiedRecords') &&
             method_exists($current_token->getConnection(), 'setRecordModificationState')
@@ -136,15 +154,11 @@ class API extends Controller
         // $request->user()->currentAccessToken()->delete();
 
         // Revoke a specific token...
-        $token = $user->tokens()->where('id', $tokenId)->get();
+        $token = $user->tokens()->where('id', $tokenId)->first();
 
         // does it exist
-        if (count($token) == 0) {
-            return response()->json([
-                'message' => 'token not found',
-                'tokenId' => $tokenId,
-                'status' => 'request failed'
-            ], 400);
+        if (!$token) {
+            return Response::make('bad request: given token not found', 400);
         }
 
         // delete it

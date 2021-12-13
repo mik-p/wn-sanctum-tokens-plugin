@@ -1,0 +1,47 @@
+<form id="sanctum-create-token-form" action="{{ __SELF__.api_basepath }}/create" method="POST"
+    enctype="multipart/form-data">
+    <div class="form-outline mb-3">
+        <input id="sanctum-create-token-name" class="form-control" type="text" name="token_name"
+            placeholder="Token Name" autocomplete="off" />
+        <label class="form-label" for="sanctum-create-token-name">Token Name</label>
+    </div>
+
+    <button id="santum-token-create-btn" class="btn btn-sm shadow-0" type="submit" value="SUBMIT"
+        form="sanctum-create-token-form">
+        <i class="fas fa-key"></i>
+        Create Token
+    </button>
+</form>
+
+{% put scripts %}
+<script>
+    jQuery(function () {
+        jQuery('#sanctum-create-token-form').on('submit', function (e) {
+            e.preventDefault();
+
+            let form_data = new FormData(this);
+
+            jQuery.ajax({
+                url: jQuery(this).attr("action"),
+                type: jQuery(this).attr("method"),
+                enctype: jQuery(this).attr("enctype"),
+                timeout: 300,
+                data: form_data,
+                contentType: false,
+                cache: false,
+                processData: false,
+                success: function (data) {
+                    let message = "API Auth Token created!";
+
+                    console.log(data.token);
+
+                    jQuery.wn.flashMsg({ text: message, class: 'success' });
+                },
+                error: function (data) {
+                    jQuery.wn.flashMsg({ text: data.responseText, class: 'error' });
+                }
+            });
+        });
+    });
+</script>
+{% endput %}

@@ -1,0 +1,131 @@
+<div id="sanctum-token-list" class="mb-2">
+    <table id="sanctum-token-table" class="table table-sm table-hover">
+        <tr class="tr-header">
+            <th class="td-check"> <input type="checkbox" id="token-checkbox-check-all" name="token-check-all" /></th>
+            <th>Name</th>
+            <th>Last Used</th>
+            <th>Created/Updated</th>
+            <th>Expires In</th>
+        </tr>
+        {% for token in __SELF__.getTokens() %}
+        <tr id="{{token.tokenId}}-select-row" class="tr-sanctum-token-row">
+            <td class="td-check token-checkbox">
+                <form id="{{token.tokenId}}-sanctum-token-user-action-form" action="{{ __SELF__.api_basepath }}"
+                    method="POST" enctype="multipart/form-data">
+                    <input id="sanctum-token-user-action-id" type="text" name="tokenId" value="{{token.tokenId}}"
+                        hidden />
+                </form>
+                <input type="checkbox" class="token-checkbox-single" id="token-checkbox-{{token.tokenId}}"
+                    name="{{token.tokenId}}" />
+            </td>
+            <td>{{token.tokenName}}</td>
+            <td>{{token.lastUsed}}</td>
+            <td>{{token.createdAt}}</td>
+            <td>{{token.expiresIn}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <button id="santum-token-refresh-btn" class="btn btn-sm shadow-0" type="submit" value="SUBMIT"
+        form="sanctum-create-refresh-form">
+        <i class="fas fa-redo"></i>
+        Refresh
+    </button>
+    <button id="santum-token-delete-btn" class="btn btn-sm shadow-0" type="submit" value="SUBMIT"
+        form="sanctum-create-delete-form">
+        <i class="fas fa-trash-alt"></i>
+        Revoke
+    </button>
+</div>
+
+{% put scripts %}
+<script>
+    // check box - all, control
+    jQuery(function () {
+        jQuery('#token-checkbox-check-all').on('change', function (e) {
+            jQuery('.token-checkbox-single').prop("checked", jQuery('#token-checkbox-check-all').prop('checked'));
+        });
+    });
+
+    // refresh selected token rows
+    jQuery(function () {
+        // on refresh button
+        jQuery('#santum-token-refresh-btn').on('click', function (e) {
+            e.preventDefault();
+
+            // check each token row
+            jQuery('.tr-sanctum-token-row').each(function (index) {
+
+                // if the row checkbox is checked
+                if (jQuery(this).find('.token-checkbox-single').prop("checked")) {
+                    // get the token id
+                    let token_id = jQuery(this).find('.token-checkbox-single').prop("name");
+
+                    // make a refresh request
+                    let form = jQuery('#' + token_id + '-sanctum-token-user-action-form');
+
+                    let form_data = new FormData(form[0]);
+
+                    jQuery.ajax({
+                        url: form.attr("action") + '/refresh',
+                        type: form.attr("method"),
+                        enctype: form.attr("enctype"),
+                        timeout: 300,
+                        data: form_data,
+                        contentType: false,
+                        cache: false,
+                        processData: false,
+                        success: function (data) {
+                            let message = "API Auth Token - " + token_id + " refreshed!";
+                            jQuery.wn.flashMsg({ text: message, class: 'success' });
+                        },
+                        error: function (data) {
+                            jQuery.wn.flashMsg({ text: data.responseText, class: 'error' });
+                        }
+                    });
+                }
+            });
+        });
+    });
+
+    // delete selected token rows
+    jQuery(function () {
+        // on delete button
+        jQuery('#santum-token-delete-btn').on('click', function (e) {
+            e.preventDefault();
+
+            // check each token row
+            jQuery('.tr-sanctum-token-row').each(function (index) {
+
+                // if the row checkbox is checked
+                if (jQuery(this).find('.token-checkbox-single').prop("checked")) {
+                    // get the token id
+                    let token_id = jQuery(this).find('.token-checkbox-single').prop("name");
+
+                    // make a refresh request
+                    let form = jQuery('#' + token_id + '-sanctum-token-user-action-form');
+
+                    let form_data = new FormData(form[0]);
+
+                    jQuery.ajax({
+                        url: form.attr("action") + '/revoke/' + token_id,
+                        type: form.attr("method"),
+                        enctype: form.attr("enctype"),
+                        timeout: 300,
+                        data: form_data,
+                        contentType: false,
+                        cache: false,
+                        processData: false,
+                        success: function (data) {
+                            let message = "API Auth Token - " + token_id + " deleted!";
+                            jQuery.wn.flashMsg({ text: message, class: 'warning' });
+                        },
+                        error: function (data) {
+                            jQuery.wn.flashMsg({ text: data.responseText, class: 'error' });
+                        }
+                    });
+                }
+            });
+        });
+    });
+</script>
+{% endput %}
