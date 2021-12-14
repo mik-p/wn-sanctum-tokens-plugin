@@ -21,6 +21,11 @@ The other endpoints are guarded via token so you need to `create` a token and pr
 
 ### middleware
 
+There are three middleware classes:
+1. HasBearerToken => allow if there is a valid token present
+1. UserFromBearerToken => log the user in using a valid token
+1. SoftUserFromBearerToken => try to log the user in with a valid token or give up and pass the request on to next middleware
+
 Add the provided middleware to routes for example:
 
 ```php
