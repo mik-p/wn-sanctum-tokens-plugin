@@ -21,6 +21,7 @@ fields:
         label: 'Token Expiration'
         span: auto
         placeholder: '60'
+        default: '20'
         type: number
         comment: 'The expiration time on API tokens'
     # sanctum_user_class:
