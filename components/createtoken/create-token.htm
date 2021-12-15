@@ -15,6 +15,7 @@
 
 {% put scripts %}
 <script>
+    // make a create token request
     jQuery(function () {
         jQuery('#sanctum-create-token-form').on('submit', function (e) {
             e.preventDefault();
@@ -25,7 +26,7 @@
                 url: jQuery(this).attr("action"),
                 type: jQuery(this).attr("method"),
                 enctype: jQuery(this).attr("enctype"),
-                timeout: 300,
+                timeout: 1000,
                 data: form_data,
                 contentType: false,
                 cache: false,
@@ -36,6 +37,14 @@
                     console.log(data.token);
 
                     jQuery.wn.flashMsg({ text: message, class: 'success' });
+
+                    // update list if present
+                    if (document.getElementById('sanctum-token-list-partial-container') && document.getElementById('sanctum-token-list')) {
+                        // update list view
+                        jQuery.request('{{__SELF__}}::onTokenListChange', {
+                            update: { '{{__SELF__}}::token-list': '#sanctum-token-list' }
+                        });
+                    }
                 },
                 error: function (data) {
                     jQuery.wn.flashMsg({ text: data.responseText, class: 'error' });

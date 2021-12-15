@@ -56,4 +56,9 @@ class CreateToken extends ComponentBase
 
         return $token_array;
     }
+
+    public function onTokenListChange()
+    {
+        return [];
+    }
 }
