@@ -10,6 +10,7 @@ use Auth;
 use Winter\User\Models\User as UserModel;
 use Laravel\Sanctum\Sanctum;
 use Illuminate\Foundation\AliasLoader;
+use System\Classes\SettingsManager;
 
 class Plugin extends PluginBase
 {
@@ -36,6 +37,7 @@ class Plugin extends PluginBase
             'settings' => [
                 'label'       => 'Sanctum API Tokens',
                 'description' => 'Manage Sanctum API Token settings.',
+                'category'    => SettingsManager::CATEGORY_USERS,
                 'icon'        => 'wn-icon-key',
                 'class'       => 'mikp\sanctum\Models\Settings',
                 'order'       => 600,
