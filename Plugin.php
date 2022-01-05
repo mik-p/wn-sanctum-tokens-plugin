@@ -47,6 +47,13 @@ class Plugin extends PluginBase
         ];
     }
 
+    public function registerFormWidgets()
+    {
+        return [
+            'mikp\sanctum\FormWidgets\UpdateAuthorizationButton' => 'updateauthorizationbutton',
+        ];
+    }
+
     public function boot()
     {
         // set config
@@ -91,7 +98,7 @@ class Plugin extends PluginBase
     public function register()
     {
         // register console command
-        $this->registerConsoleCommand('mikp.authorization', 'mikp\sanctum\Console\EnableAuthorizationHeader');
+        $this->registerConsoleCommand('sanctum.authorization', 'mikp\sanctum\Console\EnableAuthorizationHeader');
     }
 
     /**

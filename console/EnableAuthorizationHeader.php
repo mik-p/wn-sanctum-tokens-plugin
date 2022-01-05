@@ -25,7 +25,7 @@ class EnableAuthorizationHeader extends Command
     /**
      * @var string The console command name.
      */
-    protected $name = 'mikp:authorization';
+    protected $name = 'sanctum:authorization';
 
     /**
      * @var string The console command description.
