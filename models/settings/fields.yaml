@@ -8,7 +8,6 @@ fields:
         label: Update .htaccess
         span: auto
         type: mikp\sanctum\FormWidgets\UpdateAuthorizationButton
-        # path: $/mikp/sanctum/formwidgets/updateauthorizationbutton/partials/_updateauthorizationbutton.htm
         comment: 'Run .htaccess update console command'
     sanctum_token_limit:
         label: 'User Token Limit'

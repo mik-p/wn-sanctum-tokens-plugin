@@ -13,13 +13,4 @@ class Settings extends Model
 
     // Reference to field configuration
     public $settingsFields = 'fields.yaml';
-
-    // ajax run console command
-    public function onRunAuthorizationConsoleCommand()
-    {
-        $this->call('mikp:authorization', [
-            '--add' => true,
-            '-y' => true
-        ]);
-    }
 }

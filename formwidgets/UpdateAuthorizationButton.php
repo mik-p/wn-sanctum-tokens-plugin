@@ -2,6 +2,8 @@
 
 namespace mikp\sanctum\FormWidgets;
 
+use Log;
+
 class UpdateAuthorizationButton extends \Backend\Classes\FormWidgetBase
 {
 
@@ -12,14 +14,19 @@ class UpdateAuthorizationButton extends \Backend\Classes\FormWidgetBase
 
     public function render()
     {
-        return $this->makePartial('updateauthorization');
+        return $this->makePartial('updateauthorizationbutton');
     }
 
+    // ajax run console command
     public function onRunAuthorizationConsoleCommand()
     {
-        $this->call('mikp:authorization', [
+        Log::info("called auth command");
+
+        $this->call('sanctum:authorization', [
             '--add' => true,
             '-y' => true
         ]);
+
+        var_dump('hi');
     }
 }
