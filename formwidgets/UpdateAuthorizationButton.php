@@ -3,6 +3,7 @@
 namespace mikp\sanctum\FormWidgets;
 
 use Log;
+use Artisan;
 
 class UpdateAuthorizationButton extends \Backend\Classes\FormWidgetBase
 {
@@ -14,19 +15,30 @@ class UpdateAuthorizationButton extends \Backend\Classes\FormWidgetBase
 
     public function render()
     {
-        return $this->makePartial('updateauthorizationbutton');
+        return $this->makePartial('updateauthorizationbutton', ['success' => 'command not run..']);
     }
 
     // ajax run console command
     public function onRunAuthorizationConsoleCommand()
     {
-        Log::info("called auth command");
+        $ret = Artisan::call(
+            'sanctum:authorization',
+            [
+                '--add' => true,
+                '-y' => true
+            ]
+        );
 
-        $this->call('sanctum:authorization', [
-            '--add' => true,
-            '-y' => true
-        ]);
+        Log::info("called auth header update command");
 
-        var_dump('hi');
+        // var_dump('hi');
+        if ($ret) {
+            echo ('command failed');
+        }
+
+        return [
+            'partial' => $this->makePartial('updateauthorizationbutton', ['success' => 'command was run..'])
+        ];
+        // return $ret;
     }
 }

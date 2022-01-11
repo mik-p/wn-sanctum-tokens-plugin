@@ -1,6 +1,10 @@
-<div>
+<div id="update-auth-btn">
+    <p>
+        <?= $success ?>
+    </p>
     <a href="javascript:void(0);" class="btn btn-success"
-        data-request="updateauthorizationbutton::onRunAuthorizationConsoleCommand">
+        data-request="<?= $this->getEventHandler('onRunAuthorizationConsoleCommand') ?>"
+        data-request-success="$('#update-auth-btn').replaceWith(data.partial)">
         Update .htaccess
     </a>
 </div>

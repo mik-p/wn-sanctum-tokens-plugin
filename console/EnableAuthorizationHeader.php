@@ -19,6 +19,7 @@ class EnableAuthorizationHeader extends Command
     protected $apache_write_string = "    ##" . PHP_EOL .
         "    ## Authorization header" . PHP_EOL .
         "    ##" . PHP_EOL .
+        "    # AUTO-GENERATED DO NOT MODIFY" . PHP_EOL .
         "    RewriteCond %{HTTP:Authorization} ^(.*)" . PHP_EOL .
         "    RewriteRule .* - [e=HTTP_AUTHORIZATION:%1]" . PHP_EOL;
 
