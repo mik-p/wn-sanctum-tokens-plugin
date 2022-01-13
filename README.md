@@ -7,8 +7,9 @@ Add Laravel Sanctum API Tokens to Winter.Users to allow API Auth via Sanctum tok
 
 ### depends on
 
-This plugin depends on Laravel Sanctum for tokens
-This plugin depends on the Winter.User plugin for users
+This plugin depends on [Laravel Sanctum](https://github.com/laravel/sanctum) for tokens
+
+This plugin depends on the [Winter.User plugin](https://github.com/wintercms/wn-user-plugin) for users
 
 #### .htaccess headers
 
