@@ -1,6 +1,7 @@
 {
     "name": "mikp/wn-sanctum-tokens-plugin",
     "description": "Laravel Sanctum plugin for Winter CMS",
+    "homepage": "https://github.com/mik-p/wn-sanctum-tokens-plugin",
     "type": "winter-plugin",
     "license": "BSD-3",
     "authors": [
