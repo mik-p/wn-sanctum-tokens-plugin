@@ -37,7 +37,7 @@
 
                     console.log(data.token);
 
-                    jQuery.wn.flashMsg({ text: message, class: 'success' });
+                    jQuery.wn.flashMsg({ text: message, class: 'success', interval: 3 });
 
                     // update list if present
                     if (document.getElementById('sanctum-token-list-partial-container') && document.getElementById('sanctum-token-list')) {
@@ -48,7 +48,7 @@
                     }
                 },
                 error: function (data) {
-                    jQuery.wn.flashMsg({ text: data.responseText, class: 'error' });
+                    jQuery.wn.flashMsg({ text: data.responseText, class: 'error', interval: 3 });
                 }
             });
         });
