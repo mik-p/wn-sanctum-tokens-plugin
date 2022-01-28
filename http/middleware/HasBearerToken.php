@@ -71,6 +71,6 @@ class HasBearerToken
             return false;
         }
 
-        return $accessToken->created_at->gt(now()->subMinutes($this->expiration));
+        return (($accessToken && !$this->expiration) || $accessToken->created_at->gt(now()->subMinutes($this->expiration)));
     }
 }
