@@ -13,16 +13,9 @@
     "require": {
         "composer/installers": "~1.0",
         "winter/wn-user-plugin": "^2.0",
-        "laravel/sanctum": "^2.12",
-        "treeware/plant": "^0.1.0"
+        "laravel/sanctum": "^2.12"
     },
     "extra": {
-        "installer-name": "sanctum",
-        "treeware": {}
-    },
-    "config": {
-        "allow-plugins": {
-            "treeware/plant": true
-        }
+        "installer-name": "sanctum"
     }
 }
