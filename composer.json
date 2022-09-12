@@ -19,5 +19,10 @@
     "extra": {
         "installer-name": "sanctum",
         "treeware": {}
+    },
+    "config": {
+        "allow-plugins": {
+            "treeware/plant": true
+        }
     }
 }
